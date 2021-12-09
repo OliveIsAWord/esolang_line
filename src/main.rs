@@ -234,9 +234,15 @@ impl<'a> ByteBuffer<'a> {
     }
 }
 
-fn main() -> io::Result<()> {
+fn main() {
     let args: Vec<String> = env::args().collect();
-    let f = read_file(&args[1])?;
+    let f;
+    if let Some(fp) = args.get(1) {
+        f = read_file(fp).expect("error reading file");
+    } else {
+        eprintln!("USAGE: {} file_path", args[0]);
+        return;
+    };
     let mut bytes = ByteBuffer::new(&f);
     //println!("{:?}", &f);
     let mut points = Vec::new();
@@ -257,7 +263,6 @@ fn main() -> io::Result<()> {
         trials += 1;
     }
     println!("Mean time: {}", sum_time / trials);
-    Ok(())
 }
 
 fn read_file(filepath: &str) -> io::Result<Vec<u8>> {
