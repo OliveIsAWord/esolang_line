@@ -28,6 +28,9 @@ where
 {
     fn read_next(&mut self) -> io::Result<Val>;
 }
+
+// Probably the worst offender
+// If you can read this line, it's already too late for you
 impl<Iter: Iterator<Item = io::Result<Val>>, Val> ReadNext<Iter, Val> for Iter {
     fn read_next(&mut self) -> io::Result<Val> {
         match self.next() {
