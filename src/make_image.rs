@@ -5,9 +5,13 @@ const MARGIN: u32 = 20;
 const UNIT_SIZE: u32 = 20;
 const HALF_UNIT_SIZE: u32 = (UNIT_SIZE + 1) / 2; // division rounding up
 
+#[allow(dead_code)]
 static WHITE: Rgb<u8> = Rgb([255, 255, 255]);
+#[allow(dead_code)]
 static BLACK: Rgb<u8> = Rgb([0, 0, 0]);
+#[allow(dead_code)]
 static RED: Rgb<u8> = Rgb([255, 0, 0]);
+#[allow(dead_code)]
 static GREEN: Rgb<u8> = Rgb([0, 255, 0]);
 #[allow(dead_code)]
 static BLUE: Rgb<u8> = Rgb([0, 255, 0]);
@@ -68,8 +72,9 @@ fn draw_cursor(img: &mut RgbImage, cursor: Cursor, bounds: Bounds) {
         for y in 0..raster.height {
             let pixel_color = match raster.get(x, y) {
                 cursor_images::PixelType::Empty => continue,
-                cursor_images::PixelType::Fill => RED,
-                cursor_images::PixelType::Border => GREEN,
+                cursor_images::PixelType::Fill => BLACK,
+                cursor_images::PixelType::Border => WHITE,
+                //cursor_images::PixelType::Border => continue,
             };
             let (x, y) = (x as isize, y as isize);
             let ox = raster.offset_x as isize;

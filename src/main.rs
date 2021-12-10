@@ -88,10 +88,10 @@ impl Cursor {
         };
         debug_assert!(dx != 0 || dy != 0);
         let new_dir = (self.dir + move_dir.trailing_zeros()) % 8;
-        if new_dir == self.dir {
+        //if new_dir == self.dir {
             self.x += dx;
             self.y += dy;
-        }
+        //}
         self.dir = new_dir;
     }
 }
