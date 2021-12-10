@@ -1,8 +1,3 @@
-// Project Plans:
-// - text based file format
-// - interpreter
-// - compiler
-// - create path from image
 mod cursor_images;
 mod make_image;
 use make_image::make_image;
