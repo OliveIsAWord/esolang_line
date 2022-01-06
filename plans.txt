@@ -1,0 +1,6 @@
+path.rs - Struct that stores the curser and points as well as their directions, cursor can move
+reader.rs - Transforms filepath to Path
+program.rs (future addition) - Struct that turns a Path into a program
+renderer/mod.rs - Creates image from a Path
+renderer/cursor_images.rs (private) - Auto-generated, stores cursor pixel images as arrays
+main.rs - Takes command line argument as filepath, creates image animation of path traversal

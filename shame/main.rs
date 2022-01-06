@@ -45,6 +45,7 @@ fn read_file() -> io::Result<Vec<Point>> {
     let mut bytes = file.bytes().peekable();
     let mut points: Vec<Point> = Vec::new();
     loop {
+        // I would've done an `is_none` call nowadays
         if let None = bytes.peek() {
             break;
         }
