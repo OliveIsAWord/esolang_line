@@ -1,26 +1,16 @@
-use crate::{cursor_images, Bounds, Cursor, Point, Pos, Program};
-use image::{self, Rgb, RgbImage};
+use crate::utility::{Bounds, Pos, colors};
+use crate::{cursor_images, Cursor, Path, Point};
+use image::{self, RgbImage};
 
 const MARGIN: u32 = 20;
 const UNIT_SIZE: u32 = 20;
 const HALF_UNIT_SIZE: u32 = (UNIT_SIZE + 1) / 2; // division rounding up
 
-#[allow(dead_code)]
-static WHITE: Rgb<u8> = Rgb([255, 255, 255]);
-#[allow(dead_code)]
-static BLACK: Rgb<u8> = Rgb([0, 0, 0]);
-#[allow(dead_code)]
-static RED: Rgb<u8> = Rgb([255, 0, 0]);
-#[allow(dead_code)]
-static GREEN: Rgb<u8> = Rgb([0, 255, 0]);
-#[allow(dead_code)]
-static BLUE: Rgb<u8> = Rgb([0, 255, 0]);
-
-pub fn make_image(program: &Program, path: &str) -> image::error::ImageResult<()> {
+pub fn make_image(program: &Path, path: &str) -> image::error::ImageResult<()> {
     let bounds = program.get_bounds();
     let width = UNIT_SIZE * (bounds.x2 - bounds.x1) as u32 + 2 * MARGIN + 1;
     let height = UNIT_SIZE * (bounds.y2 - bounds.y1) as u32 + 2 * MARGIN + 1;
-    let mut img = RgbImage::from_pixel(width, height, WHITE);
+    let mut img = RgbImage::from_pixel(width, height, colors::WHITE);
 
     for p in program.points {
         draw_point(&mut img, p, bounds);
@@ -44,7 +34,7 @@ static LINE_DIRS: [(u8, i32, i32); 8] = [
 
 fn draw_point(img: &mut RgbImage, point: &Point, bounds: Bounds) {
     let (x, y) = to_coord(point.x, point.y, bounds);
-    img.put_pixel(x, y, BLACK);
+    img.put_pixel(x, y, colors::BLACK);
     for (mask, dx, dy) in LINE_DIRS {
         if point.dirs & mask != 0 {
             draw_line(img, x, y, dx, dy);
@@ -56,7 +46,7 @@ fn draw_line(img: &mut RgbImage, mut x: u32, mut y: u32, dx: i32, dy: i32) {
     for _ in 1..=HALF_UNIT_SIZE {
         x = x.wrapping_add(dx as u32);
         y = y.wrapping_add(dy as u32);
-        img.put_pixel(x, y, BLACK);
+        img.put_pixel(x, y, colors::BLACK);
     }
 }
 
@@ -72,8 +62,8 @@ fn draw_cursor(img: &mut RgbImage, cursor: Cursor, bounds: Bounds) {
         for y in 0..raster.height {
             let pixel_color = match raster.get(x, y) {
                 cursor_images::PixelType::Empty => continue,
-                cursor_images::PixelType::Fill => BLACK,
-                cursor_images::PixelType::Border => WHITE,
+                cursor_images::PixelType::Fill => colors::BLACK,
+                cursor_images::PixelType::Border => colors::WHITE,
                 //cursor_images::PixelType::Border => continue,
             };
             let (x, y) = (x as isize, y as isize);

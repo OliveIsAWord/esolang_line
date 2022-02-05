@@ -8,9 +8,9 @@ This project right now is in a sorry state and currently in active development u
 # Necessary Steps to Version 0.1.0
 - [x] Read and store line path
 - [x] Export image of line path
-- [ ] Refactoring code
-- [ ] organizing code into source files
+- [x] organizing code into source files
 - [ ] Compile path into Brainfuck IR
+- [ ] Refactoring code
 - [ ] Interpreter for Brainfuck IR
 - [ ] Compile IR to x86/x64
 - [ ] Proper CLI handling

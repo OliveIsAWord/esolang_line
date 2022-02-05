@@ -19,7 +19,6 @@ pub enum PixelType {
     Border,
 }
 
-
 impl BitRaster<'_> {
     pub fn get(&self, x: usize, y: usize) -> PixelType {
         if self.get_raw(x, y) {
@@ -54,21 +53,12 @@ const W: bool = true;
 #[allow(non_upper_case_globals)]
 const o: bool = false;
 
-
 const CARDINAL_BITS: [bool; 12 * 13] = [
-    o,o,o,o,o,o,o,o,o,o,o,o,
-    o,W,o,o,o,o,o,o,o,o,o,o,
-    o,W,W,W,o,o,o,o,o,o,o,o,
-    o,o,W,W,W,W,o,o,o,o,o,o,
-    o,o,W,W,W,W,W,W,o,o,o,o,
-    o,o,o,W,W,W,W,W,W,W,o,o,
-    o,o,o,W,W,W,W,W,W,W,W,o,
-    o,o,o,W,W,W,W,W,W,W,o,o,
-    o,o,W,W,W,W,W,W,o,o,o,o,
-    o,o,W,W,W,W,o,o,o,o,o,o,
-    o,W,W,W,o,o,o,o,o,o,o,o,
-    o,W,o,o,o,o,o,o,o,o,o,o,
-    o,o,o,o,o,o,o,o,o,o,o,o,
+    o, o, o, o, o, o, o, o, o, o, o, o, o, W, o, o, o, o, o, o, o, o, o, o, o, W, W, W, o, o, o, o,
+    o, o, o, o, o, o, W, W, W, W, o, o, o, o, o, o, o, o, W, W, W, W, W, W, o, o, o, o, o, o, o, W,
+    W, W, W, W, W, W, o, o, o, o, o, W, W, W, W, W, W, W, W, o, o, o, o, W, W, W, W, W, W, W, o, o,
+    o, o, W, W, W, W, W, W, o, o, o, o, o, o, W, W, W, W, o, o, o, o, o, o, o, W, W, W, o, o, o, o,
+    o, o, o, o, o, W, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o,
 ];
 
 pub const CARDINAL: BitRaster = BitRaster {
@@ -79,20 +69,12 @@ pub const CARDINAL: BitRaster = BitRaster {
     pixels: &CARDINAL_BITS,
 };
 
-
 const DIAGONAL_BITS: [bool; 12 * 12] = [
-    o,o,o,o,o,o,o,o,o,o,o,o,
-    o,o,o,o,o,o,o,o,W,W,W,o,
-    o,o,o,o,o,o,W,W,W,W,W,o,
-    o,o,o,o,W,W,W,W,W,W,W,o,
-    o,W,W,W,W,W,W,W,W,W,o,o,
-    o,o,W,W,W,W,W,W,W,W,o,o,
-    o,o,o,o,W,W,W,W,W,o,o,o,
-    o,o,o,o,o,W,W,W,W,o,o,o,
-    o,o,o,o,o,o,W,W,o,o,o,o,
-    o,o,o,o,o,o,W,W,o,o,o,o,
-    o,o,o,o,o,o,o,W,o,o,o,o,
-    o,o,o,o,o,o,o,o,o,o,o,o,
+    o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, W, W, W, o, o, o, o, o, o, o, W, W,
+    W, W, W, o, o, o, o, o, W, W, W, W, W, W, W, o, o, W, W, W, W, W, W, W, W, W, o, o, o, o, W, W,
+    W, W, W, W, W, W, o, o, o, o, o, o, W, W, W, W, W, o, o, o, o, o, o, o, o, W, W, W, W, o, o, o,
+    o, o, o, o, o, o, W, W, o, o, o, o, o, o, o, o, o, o, W, W, o, o, o, o, o, o, o, o, o, o, o, W,
+    o, o, o, o, o, o, o, o, o, o, o, o, o, o, o, o,
 ];
 
 pub const DIAGONAL: BitRaster = BitRaster {
